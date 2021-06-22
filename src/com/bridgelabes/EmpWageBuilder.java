@@ -7,43 +7,30 @@ public class EmpWageBuilder {
 	public static final int WAGE_PER_HOUR = 20;
 	public static final int FULLDAY = 8;
 	public static final int PART_TIME=4;
+	public static final int NUM_OF_WROKING_DAY=20;
 
 	public static void main(String[] args) 
 	{
+		int monthlyEmpWage = 0;
 		int dailywage = 0;
-		double empCheck = Math.floor(Math.random() * 10) % 3;
-//		if (empCheck == IS_EMP_PRESENT) 
-//		{
-//			System.out.println("Emp is present");
-//			dailywage = FULLDAY * WAGE_PER_HOUR;
-//			System.out.println("Daily Emp Wage is : " + dailywage);
-//		} 
-//		else if (IS_PART_TIME == empCheck) 
-//		{
-//			System.out.println("Emp is present half day");
-//			dailywage = PART_TIME * WAGE_PER_HOUR;
-//			System.out.println("Daily Emp Wage is : " + dailywage);
-//			
-//		}
-//		else 
-//		{
-//			System.out.println("Emp is absent");
-//			System.out.println("Daily Emp Wage is : " + dailywage);
-//		}
-		
-		switch ((int) empCheck) 
+		for (int day = 0; day < NUM_OF_WROKING_DAY; day++) 
 		{
-	    case IS_EMP_PRESENT: 
-	    	System.out.println("Emp is present");
-     		dailywage = FULLDAY * WAGE_PER_HOUR;
-			System.out.println("Daily Emp Wage is : " +dailywage);
-			break;
-	    case IS_PART_TIME: 
-	    	dailywage = PART_TIME * WAGE_PER_HOUR;
-			System.out.println("Part time Emp Wage is : "+dailywage);
-			break;	    
-	    default :
-	    	System.out.println("Emp is Absent");
-	    }
+			double empCheck = Math.floor(Math.random() * 10) % 3;
+
+			switch ((int) empCheck) {
+			case IS_EMP_PRESENT:
+				dailywage = FULLDAY * WAGE_PER_HOUR;
+				break;
+			case IS_PART_TIME:
+				dailywage = PART_TIME * WAGE_PER_HOUR;				
+				break;
+			default:
+				System.out.println("Emp is Absent");
+			}
+			monthlyEmpWage = monthlyEmpWage + dailywage ;
+			System.out.println("Emp Wage is : "+dailywage);
+			
+		}
+		System.out.println("monthly wage : " +monthlyEmpWage);
 	}
 }
