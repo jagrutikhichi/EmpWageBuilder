@@ -4,17 +4,11 @@ public class EmpWageBuilder {
 
 	public static final int IS_EMP_PRESENT = 1;
 	public static final int IS_PART_TIME= 2;
-	public static final int WAGE_PER_HOUR = 20;
-	public static final int NUM_OF_WROKING_DAY=20;
-	public static final int MAX_HRS_ALLOWED = 100;
-
-
-	public static void main(String[] args) 
-	{
+	
+	public static void calculateEmpWage(int WAGE_PER_HOUR, int MAX_HRS_ALLOWED, int NUM_OF_WROKING_DAY , String company) {
 		int monthlyEmpWage = 0;
 		int totalWorkingDays = 0;
-		int totalEmpHrs = 0;
-		
+		int totalEmpHrs = 0;		
 		while (totalEmpHrs < MAX_HRS_ALLOWED && totalWorkingDays < NUM_OF_WROKING_DAY)
 		{
 			totalWorkingDays++ ;
@@ -41,7 +35,13 @@ public class EmpWageBuilder {
 			System.out.println("Emp Wage is : "+dailywage);
 			
 		}
-		System.out.println("monthly wage : " +monthlyEmpWage);
+		System.out.println("monthly wage : " +monthlyEmpWage+" of "+company);
 		System.out.println("total Hrs : " +totalEmpHrs);
+	}
+	
+	public static void main(String[] args) 
+	{
+		calculateEmpWage(20, 100, 20,"Dmart");
+		calculateEmpWage(15, 90, 20,"Relience");
 	}
 }
