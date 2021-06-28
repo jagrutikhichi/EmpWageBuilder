@@ -14,10 +14,7 @@ public class EmpWageBuilder {
 			totalWorkingDays++ ;
 			int dailywage = 0;
 			int empHrs = 0;
-			
 			double empCheck = Math.floor(Math.random() * 10) % 3;
-			
-
 			switch ((int) empCheck) {
 			case IS_EMP_PRESENT:
 				empHrs= 8;
@@ -26,14 +23,10 @@ public class EmpWageBuilder {
 				empHrs = 4;
 				break;
 			default:
-				System.out.println("Emp is Absent");
 			}
 			totalEmpHrs = totalEmpHrs + empHrs;
 			dailywage = WAGE_PER_HOUR * empHrs ;
-			monthlyEmpWage = monthlyEmpWage + dailywage ;
-			
-			System.out.println("Emp Wage is : "+dailywage);
-			
+			monthlyEmpWage = monthlyEmpWage + dailywage ;			
 		}
 		System.out.println("monthly wage : " +monthlyEmpWage+" of "+company);
 		System.out.println("total Hrs : " +totalEmpHrs);
