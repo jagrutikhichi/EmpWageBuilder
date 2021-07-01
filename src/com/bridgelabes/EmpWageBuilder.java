@@ -4,23 +4,34 @@ public class EmpWageBuilder {
 
 	public static final int IS_EMP_PRESENT = 1;
 	public static final int IS_PART_TIME= 2;
-	public static int WAGE_PER_HOUR;
-	public static int MAX_HRS_ALLOWED;
-	public static int NUM_OF_WROKING_DAY;
-	public static String company;
 	
-	public EmpWageBuilder(int WAGE_PER_HOUR, int MAX_HRS_ALLOWED, int NUM_OF_WROKING_DAY, String company) {
-		this.WAGE_PER_HOUR = WAGE_PER_HOUR;
-		this.MAX_HRS_ALLOWED = MAX_HRS_ALLOWED;
-		this.NUM_OF_WROKING_DAY = NUM_OF_WROKING_DAY;
-		this.company = company;
+	public CompanyEmployeWage[] companyEmployeWageArray;
+	private int numOfCompanies = 0;
+	
+	
+	public EmpWageBuilder() {
+		super();
+		companyEmployeWageArray = new CompanyEmployeWage[5];
 	}
-	
-	public static void calculateEmpWage() {
+	public void addcompanyEmpWage(int WAGE_PER_HOUR, int MAX_HRS_ALLOWED, int NUM_OF_WROKING_DAY, String company) {
+		companyEmployeWageArray[numOfCompanies] = new CompanyEmployeWage(WAGE_PER_HOUR, MAX_HRS_ALLOWED, NUM_OF_WROKING_DAY, company);
+		numOfCompanies++;
+	}
+	public void computeEmpWage() {
+		for (int i = 0; i<companyEmployeWageArray.length; i++) {
+			CompanyEmployeWage companyEmployeWage = companyEmployeWageArray[i];
+			if (companyEmployeWage != null) {
+				int monthlyEmployeeWage = this.calculateEmpWage(companyEmployeWage);
+				companyEmployeWage.setTotalEmpWage(monthlyEmployeeWage);
+				System.out.println("Company employee wage is :"+companyEmployeWage);
+			}
+		}
+	}
+	public int calculateEmpWage(CompanyEmployeWage companyEmployeWage) {
 		int monthlyEmpWage = 0;
 		int totalWorkingDays = 0;
 		int totalEmpHrs = 0;		
-		while (totalEmpHrs < MAX_HRS_ALLOWED && totalWorkingDays < NUM_OF_WROKING_DAY)
+		while (totalEmpHrs < companyEmployeWage.MAX_HRS_ALLOWED && totalWorkingDays < companyEmployeWage.NUM_OF_WROKING_DAY)
 		{
 			totalWorkingDays++ ;
 			int dailywage = 0;
@@ -34,20 +45,21 @@ public class EmpWageBuilder {
 				empHrs = 4;
 				break;
 			default:
+				empHrs = 0;
+				break;
 			}
 			totalEmpHrs = totalEmpHrs + empHrs;
-			dailywage = WAGE_PER_HOUR * empHrs ;
-			monthlyEmpWage = monthlyEmpWage + dailywage ;			
+			dailywage = companyEmployeWage.WAGE_PER_HOUR * empHrs ;
+			monthlyEmpWage = monthlyEmpWage + dailywage ;
+			System.out.println(monthlyEmpWage);
 		}
-		System.out.println("monthly wage : " +monthlyEmpWage+" of "+company);
-		System.out.println("total Hrs : " +totalEmpHrs);
+		return monthlyEmpWage;
 	}
 	
 	public static void main(String[] args) 
 	{
-		EmpWageBuilder dmart = new EmpWageBuilder(20, 100, 20, "Dmart");
-		dmart.calculateEmpWage();
-		EmpWageBuilder reliance = new EmpWageBuilder(20, 100, 20, "Reliance");
-		reliance.calculateEmpWage();
+		EmpWageBuilder wageBuilder = new EmpWageBuilder();
+		wageBuilder.addcompanyEmpWage(20, 100, 20, "Dmart");
+		wageBuilder.addcompanyEmpWage(15, 200, 20, "Relience");
 	}
 }
